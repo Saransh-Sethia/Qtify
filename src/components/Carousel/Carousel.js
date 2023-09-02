@@ -1,5 +1,5 @@
-import React,{useEffect} from 'react';
-import   {Swiper, useSwiper,SwiperSlide} from 'swiper/react';
+import React,{useEffect, useRef} from 'react';
+import   {Swiper, useSwiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import styles from './Carousel.css';
 import { Navigation } from 'swiper/modules';
@@ -7,20 +7,24 @@ import CarouselLeftNavigation from './CarouselLeftNavigation/CarouselLeftNavigat
 import CarouselRightNavigation from './CarouselRightNavigation/CarouselRightNavigation';
 
 const Controls = ({data}) => {
+  let swiperRef = useRef(null);
 const swiper = useSwiper();
+console.log(swiper);
 
 useEffect(()=>{
-    swiper.slideTo(0)
-},[data]);
+    swiperRef.current?.swiper.slideTo(0);
+},[data])
+
 return <></>;
+
 }
 
 const Carousel = ({data, renderCardComponent}) => {
   return (
-    <div clasName={styles.wrapper}>
+    <div className={styles.wrapper}>
       <Swiper 
       initialSlide={0} 
-      modules={Navigation} 
+      modules={{Navigation}} 
       slidesPerView={"auto"} 
       spaceBetween={40}
       allowTouchMove>

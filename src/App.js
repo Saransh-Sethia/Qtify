@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchSongs, fetchTopAlbums } from "./api/api";
 import Hero from "./components/Hero/Hero";
 import Navbar from "./components/Navbar/Navbar";
-import styles from "./App.css";
+import styles from "./App.module.css";
 import { data } from "./mockData/mockData";
 import Section from "./components/Section/Section";
 
@@ -42,8 +42,9 @@ function App() {
 
   const generateData = async () => {
     try {
-      const res = fetchTopAlbums();
+      const res = await fetchTopAlbums();
       setData(res);
+      console.log("res",res);
     } catch (e) {
       console.log(e);
     }
@@ -85,6 +86,7 @@ function App() {
           data={data}
           filteredDataValues={data}
         />
+        {/* {console.log("songsData", songsData)}; */}
         <Section
           type="song"
           title="Songs"

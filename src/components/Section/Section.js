@@ -11,7 +11,7 @@ const Section = ({
    type, 
    value,
    filteredData=null,
-   filteredDataValues=[],
+   filteredDataValues,
    toggle=false,
    handleToggle=null,
    handleChange

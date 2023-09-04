@@ -7,12 +7,12 @@ import CarouselLeftNavigation from './CarouselLeftNavigation/CarouselLeftNavigat
 import CarouselRightNavigation from './CarouselRightNavigation/CarouselRightNavigation';
 
 const Controls = ({data}) => {
-  let swiperRef = useRef(null);
+  // let swiperRef = useRef(null);
 const swiper = useSwiper();
 console.log(swiper);
 
 useEffect(()=>{
-    swiperRef.current?.swiper.slideTo(0);
+    swiper.slideTo(0, null);
 },[data])
 
 return <></>;
@@ -31,11 +31,14 @@ const Carousel = ({data, renderCardComponent}) => {
 <Controls data={data}/>
 <CarouselLeftNavigation />
 <CarouselRightNavigation />
-{data.map((item)=>{
+{console.log("data", data)}
+{data.map((item)=>
+(
+  // console.log(item)
     <SwiperSlide>
 {renderCardComponent(item)}
     </SwiperSlide>
-})}
+))}
       </Swiper>
     </div>
   )

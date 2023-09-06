@@ -1,7 +1,7 @@
 import React,{useEffect, useRef} from 'react';
 import   {Swiper, useSwiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
-import styles from './Carousel.css';
+import styles from './Carousel.module.css';
 import { Navigation } from 'swiper/modules';
 import CarouselLeftNavigation from './CarouselLeftNavigation/CarouselLeftNavigation';
 import CarouselRightNavigation from './CarouselRightNavigation/CarouselRightNavigation';
@@ -9,10 +9,10 @@ import CarouselRightNavigation from './CarouselRightNavigation/CarouselRightNavi
 const Controls = ({data}) => {
   // let swiperRef = useRef(null);
 const swiper = useSwiper();
-console.log(swiper);
+// console.log(swiper);
 
 useEffect(()=>{
-    swiper.slideTo(0, null);
+    swiper.slideTo(0, 0);
 },[data])
 
 return <></>;
@@ -31,7 +31,7 @@ const Carousel = ({data, renderCardComponent}) => {
 <Controls data={data}/>
 <CarouselLeftNavigation />
 <CarouselRightNavigation />
-{console.log("data", data)}
+{/* {console.log("data", data)} */}
 {data.map((item)=>
 (
   // console.log(item)

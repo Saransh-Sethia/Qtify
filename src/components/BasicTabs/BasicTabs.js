@@ -18,7 +18,7 @@ function CustomTabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography style={{color: "primary"}}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -47,6 +47,8 @@ export default function BasicTabs({value, handleChange}) {
           <Tab label="All" {...a11yProps(0)} />
           <Tab label="Rock" {...a11yProps(1)} />
           <Tab label="Pop" {...a11yProps(2)} />
+          <Tab label="Jazz" {...a11yProps(3)} />
+          <Tab label="Blues" {...a11yProps(4)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -54,6 +56,10 @@ export default function BasicTabs({value, handleChange}) {
       <CustomTabPanel value={value} index={1}>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={4}>
       </CustomTabPanel>
     </Box>
   );

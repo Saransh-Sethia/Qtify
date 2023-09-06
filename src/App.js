@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { fetchSongs, fetchTopAlbums } from "./api/api";
+import { fetchSongs, fetchTopAlbums, fetchNewAlbums } from "./api/api";
 import Hero from "./components/Hero/Hero";
 import Navbar from "./components/Navbar/Navbar";
 import styles from "./App.module.css";
-import { data } from "./mockData/mockData";
+import { data1 } from "./mockData/mockData";
 import Section from "./components/Section/Section";
 
  
 function App() {
   const [data, setData] = useState([]);
+  const [newData, setNewData] = useState([]);
   const [songsData, setSongsData] = useState([]);
   const [filteredDataValues, setFilteredDataValues] = useState([]);
   const [toggle, setToggle] = useState(false);
@@ -22,7 +23,7 @@ function App() {
     setValue(newValue);
   };
 
-  const generateSongsData = (value) => {
+  const generateSongsData =  (value) => {
     let key;
     if (value === 0) {
       filteredData(songsData);
@@ -31,8 +32,13 @@ function App() {
       key = "rock";
     } else if (value === 2) {
       key = "pop";
+    } else if (value === 3) {
+      key = "jazz";
+    } else if (value === 4) {
+      key = "blues";
     }
-    const res = songsData.filter((item) => item.genre.key === key);
+
+    const res =  songsData.filter((item) => item.genre.key === key);
     filteredData(res);
   };
 
@@ -44,7 +50,17 @@ function App() {
     try {
       const res = await fetchTopAlbums();
       setData(res);
-      console.log("res",res);
+     
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const generateNewData = async () => {
+    try {
+      const res = await fetchNewAlbums();
+      setNewData(res);
+     
     } catch (e) {
       console.log(e);
     }
@@ -66,12 +82,19 @@ function App() {
 
   useEffect(() => {
     generateData();
+    generateNewData();
     generateAllSongData();
   }, []);
 
   return (
     <>
-      <Navbar data={data} />
+      <Navbar
+       data={data}
+       newData={newData}
+       songsData={songsData}
+       setData={setData} 
+       setNewData={setNewData} 
+       setSongsData={setSongsData} />
       <Hero />
       <div className={styles.sectionWrapper}>
         <Section
@@ -83,14 +106,14 @@ function App() {
         <Section
           type="album"
           title="New Albums"
-          data={data}
-          filteredDataValues={data}
+          data={newData}
+          filteredDataValues={newData}
         />
         {/* {console.log("songsData", songsData)}; */}
         <Section
           type="song"
           title="Songs"
-          data={songsData}
+          data={data}
           filteredData={filteredData}
           filteredDataValues={filteredDataValues}
           value={value}

@@ -10,16 +10,17 @@ export default function Search1({data}) {
         setVal(e.target.value);
     };
 
-    const clickHandler = () => {
-
+    const clickHandler = (e) => {
+      console.log(e.target.value);
+      setVal(e.target.value);
     }
   return (
     <div className={styles.wrapper}>
     <Autocomplete
     className={styles.search}
-    // freeSolo
+    freeSolo
     id="free-solo-2-demo"
-      disableClearable
+      disableClearable 
       options={data.map((item)=> item.title)}
       sx={{ width: 300 }}
       renderInput={(params) => (

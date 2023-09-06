@@ -10,7 +10,7 @@ const Section = ({
    data, 
    type, 
    value,
-   filteredData=null,
+   filteredData,
    filteredDataValues,
    toggle=false,
    handleToggle=null,
@@ -26,11 +26,11 @@ const Section = ({
       <div className={styles.header}>
         <h3>{title}</h3>
         <h4 className={styles.toggleText} onClick={handleToggle}>
-          {toggle?"Show All":"Collapse All"}
+          {toggle?"Collapse All":"Show All"}
         </h4>
       </div>
-      {type==="songs" ? <BasicTabs value={value} handleChange={handleChange} /> : null}
-      {data.length === 0 ? (
+      <BasicTabs value={value} handleChange={handleChange} />
+      {data?.length === 0 ? (
         <Box sx={{ display:"flex", justifyContent:"center", alignItems:"center" }}>
         <CircularProgress />
         </Box>
